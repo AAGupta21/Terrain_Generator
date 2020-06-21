@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,14 +12,32 @@ public class PlayerMovement : MonoBehaviour
     private float YRotation = 0f;
 
     private Vector3 Curr_Rot = Vector3.zero;
-    
+
+    private bool ControlKeyIsPressed = false;
+    private bool IsPlayerInputOn = true;
+
     void Update()
     {
-        Keyboard_Movement();
-        if (Input.GetAxis("Mouse Y") != 0 || Input.GetAxis("Mouse X") != 0)
+        if(Input.GetKeyDown(KeyCode.F1) && !ControlKeyIsPressed)
         {
-            Mouse_Movement();
+            ControlKeyPressed();
         }
+
+        if(IsPlayerInputOn)
+        {
+            Keyboard_Movement();
+            if (Input.GetAxis("Mouse Y") != 0 || Input.GetAxis("Mouse X") != 0)
+            {
+                Mouse_Movement();
+            }
+        }
+    }
+
+    private void ControlKeyPressed()
+    {
+        ControlKeyIsPressed = true;
+        IsPlayerInputOn = !IsPlayerInputOn;
+        StartCoroutine(DelayInControl());
     }
 
     private void Keyboard_Movement()
@@ -40,6 +59,12 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position += transform.right * MoveSpeed * Time.deltaTime;
         }
+    }
+
+    private IEnumerator DelayInControl()
+    {
+        yield return new WaitForSeconds(0.1f);
+        ControlKeyIsPressed = false;
     }
 
     private void Mouse_Movement()

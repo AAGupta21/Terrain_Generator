@@ -379,7 +379,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 0, b: 0.8169584, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -532,6 +532,7 @@ RectTransform:
   m_Children:
   - {fileID: 12170218}
   - {fileID: 1562758022}
+  - {fileID: 1338881234}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -540,6 +541,85 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1338881233
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1338881234}
+  - component: {fileID: 1338881236}
+  - component: {fileID: 1338881235}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1338881234
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338881233}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1029769435}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 100}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1338881235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338881233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 55
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 5
+    m_MaxSize: 55
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 'PRESS F1 TO ENABLE/DISABLE
+
+    PLAYER CONTROL'
+--- !u!222 &1338881236
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338881233}
+  m_CullTransparentMesh: 0
 --- !u!1 &1469798697
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,18 +677,20 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 2
+    m_FontSize: 55
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 40
+    m_MaxSize: 55
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Randomize Level
+  m_Text: 'Randomize
+
+    Level'
 --- !u!222 &1469798700
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -855,16 +937,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2abe6f15333322b478e92ea37b96967c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Length: 100
-  Width: 100
-  frequency: 27
-  MaxHeight: 20
-  IsMaxHeightSameAsFrequency: 0
+  Length: 150
+  Width: 150
+  Amplitude: 35
+  Frequency: 7
+  MaxHeight: 30
+  IsMaxHeightAmplitude: 0
   MinHeight: 0
-  MinForWhite: 0.9
-  MinForGreen: 0.5
-  MinForBrown: 0.4
-  MinForBlue: 0.2
+  GroundColorArray:
+  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 0.3207547, g: 0.2829677, b: 0.20728016, a: 0}
+  - {r: 0.23394506, g: 0.8018868, b: 0.14751692, a: 0}
+  - {r: 0.114142045, g: 0.64397454, b: 0.8962264, a: 0}
+  - {r: 0.125534, g: 0.25241035, b: 0.8584906, a: 0}
+  HeightDetermintOfTerrainArray:
+  - 0.75
+  - 0.7
+  - 0.45
+  - 0.25
+  - 0
   Cube_Prefab: {fileID: 1151341437033907496, guid: c08bf5e92e828024584ccd6af77641f4,
     type: 3}
 --- !u!1 &1924572577
@@ -924,18 +1015,20 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 2
+    m_FontSize: 55
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 2
-    m_MaxSize: 40
+    m_MaxSize: 55
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Generate LevelField
+  m_Text: 'Generate
+
+    LevelField'
 --- !u!222 &1924572580
 CanvasRenderer:
   m_ObjectHideFlags: 0

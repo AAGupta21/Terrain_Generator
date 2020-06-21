@@ -6,40 +6,44 @@ public class Generator : MonoBehaviour
 {
     [SerializeField] int Length = 100;
     [SerializeField] int Width = 100;
-    [SerializeField] float frequency = 5f;
+    [SerializeField] float Amplitude = 5f;
+    [SerializeField] float Frequency = 5f;
 
     [SerializeField] float MaxHeight = 20f;
-    [SerializeField] bool IsMaxHeightSameAsFrequency = false;
+    [SerializeField] bool IsMaxHeightAmplitude = false;
     [SerializeField] float MinHeight = 0f;
 
-    [SerializeField] float MinForWhite = 0.9f;
-    [SerializeField] float MinForGreen = 0.5f;
-    [SerializeField] float MinForBrown = 0.4f;
-    [SerializeField] float MinForBlue = 0.2f;
+    [SerializeField] private Color[] GroundColorArray = new Color[0];
+    [SerializeField] private float[] HeightDetermintOfTerrainArray = new float[0];
 
     [SerializeField] private GameObject Cube_Prefab = null;
 
+    private float[] ActualValueofTerrainColor = new float[0];
+
     private bool IsLevelGenerated = false;
-
-    private float MinWhite_Val = 0f;
-    private float MinGreen_Val = 0f;
-    private float MinBrown_Val = 0f;
-    private float MinBlue_Val = 0f;
-
+    
     private float X_Offset = 0f;
     private float Y_Offset = 0f;
 
     private void Start()
     {
-        if(IsMaxHeightSameAsFrequency)
+        if(IsMaxHeightAmplitude)
         {
-            MaxHeight = frequency;
+            MaxHeight = Amplitude;
         }
 
-        MinWhite_Val = (MaxHeight - MinHeight) * MinForWhite;
-        MinGreen_Val = (MaxHeight - MinHeight) * MinForGreen;
-        MinBrown_Val = (MaxHeight - MinHeight) * MinForBrown;
-        MinBlue_Val = (MaxHeight - MinHeight) * MinForBlue;
+        ActualValueofTerrainColor = new float[HeightDetermintOfTerrainArray.Length];
+
+        for(int i = 0; i < HeightDetermintOfTerrainArray.Length; i++)
+        {
+            ActualValueofTerrainColor[i] = (MaxHeight - MinHeight) * HeightDetermintOfTerrainArray[i];
+        }
+
+        if(GroundColorArray.Length != HeightDetermintOfTerrainArray.Length)
+        {
+            Debug.Break();
+            Debug.Log("Array Values mismatch!");
+        }
     }
 
     private void Instantiate_LevelField()
@@ -90,7 +94,7 @@ public class Generator : MonoBehaviour
         {
             for (int y = 0; y < Width; y++)
             {
-                float y_val = Mathf.PerlinNoise((float)x / Length + X_Offset, (float)y / Width + Y_Offset);
+                float y_val = Mathf.PerlinNoise(((float)x * Frequency / Length) + X_Offset, ((float)y * Frequency / Width) + Y_Offset);
                 
                 if(y_val > MaxHeight)
                 {
@@ -102,7 +106,7 @@ public class Generator : MonoBehaviour
                     y_val = MinHeight;
                 }
 
-                y_val *= frequency;
+                y_val *= Amplitude;
 
                 int index = x + Length * y;
                 cubeObjects[index].transform.position = 
@@ -114,26 +118,14 @@ public class Generator : MonoBehaviour
 
     private Color RetColorBasedOnHeight(float y_val)
     {
-        if(y_val > MinWhite_Val)
+        for(int i = 0; i<ActualValueofTerrainColor.Length - 1; i++)
         {
-            return Color.white;
+            if(y_val > ActualValueofTerrainColor[i])
+            {
+                return GroundColorArray[i];
+            }
         }
 
-        if (y_val > MinGreen_Val)
-        {
-            return Color.green;
-        }
-
-        if (y_val > MinBrown_Val)
-        {
-            return new Color(0.3301887f, 0.2882467f, 0.2601015f);
-        }
-
-        if (y_val > MinBlue_Val)
-        {
-            return Color.blue;
-        }
-
-        return Color.black;
+        return GroundColorArray[GroundColorArray.Length - 1];
     }
 }
